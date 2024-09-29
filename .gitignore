@@ -1,0 +1,9 @@
+# Thisoe ignores
+.vscode/
+TODO
+*.txt
+
+# env
+.env
+.env.local
+env/
