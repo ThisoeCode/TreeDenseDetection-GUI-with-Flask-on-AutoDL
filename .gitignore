@@ -7,3 +7,6 @@ TODO
 .env
 .env.local
 env/
+
+#test
+public_html/test.py
