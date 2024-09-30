@@ -1,3 +1,3 @@
 proxies:
    - host_and_port: http://127.0.0.1:2000 # 要代理到的服务地址
-     route_path: /v1/* # 匹配什么路由就转发到此地址
+     route_path: /client/* # 匹配什么路由就转发到此地址
