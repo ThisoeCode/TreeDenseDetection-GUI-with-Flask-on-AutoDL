@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block p1 %}
+{% block test %}
 
 <pre>{{ bashLog }}</pre>
 
@@ -8,8 +8,61 @@
 <button id="testjs">测试 JS</button>
 
 {% endblock %}
+
+
+
+{% block p1 %}
+
+<aside>
+
+</aside>
+<i class="p1-main">
+  <i class="media-wrap">
+    <i id="media-original"></i>
+    <i id="media-predict"></i>
+  </i>
+  <i class="foot">
+    <i class="form">
+      <i class="select-wrap">
+        <select name="model">
+          <option value="1">模型甲</option>
+          <option value="2">模型乙</option>
+          <option value="3">模型丙</option>
+          <option value="4">模型丁</option>
+        </select>
+      </i>
+      <i class="submit-wrap"><button id="submit">执行</button></i>
+    </i>
+<i class="footbash-wrap"><pre id="footbash">
+bash
+</pre></i>
+  </i>
+</i>
+
+{% endblock %}
+
+
+
 {% block p2 %}
 
+<!-- #p2/i1 -->
+<i>
+  <i class="code">
+<pre id="pre-lines">f\nf</pre> <hr>
+<pre id="pre-code"><span class="c-0">(</span><span class="c-v">description</span><span class="c-0">=</span>'Train'<span class="c-0">)</span>
+ '--data-dir'<span class="c-0">, </span><span class="c-v">default</span><span class="c-0">=</span>'data'<span class="c-0">, </span><span class="c-v">help</span><span class="c-0">=</span>'data path'<span class="c-0">)</span>
+ '--data-dir-shot'<span class="c-0">, </span><span class="c-v">default</span><span class="c-0">=</span>'data'<span class="c-0">, </span><span class="c-v">help</span><span class="c-0">=</span>'data path'<span class="c-0">)</span>
+ 
+ '--dataset'<span class="c-0">, </span><span class="c-v">default</span><span class="c-0">=</span>'TC'<span class="c-0">
 
+</pre>
+  </i>
+  <i class="run-wrap"><button id="run">执行</button></i>
+</i>
+
+<!-- #p2/i2 -->
+<i><pre id="bash-log">
+<span>> </span>BASH LOG
+</pre></i>
 
 {% endblock %}

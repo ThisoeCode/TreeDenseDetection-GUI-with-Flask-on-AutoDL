@@ -1,3 +1,6 @@
 proxies:
-   - host_and_port: http://127.0.0.1:2000 # 要代理到的服务地址
-     route_path: /client/* # 匹配什么路由就转发到此地址
+   - host_and_port: http://127.0.0.1:2000
+     route_path: /client/*
+
+   - host_and_port: http://127.0.0.1:2333
+     route_path: /api/*

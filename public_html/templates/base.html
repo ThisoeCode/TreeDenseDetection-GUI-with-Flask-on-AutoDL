@@ -11,6 +11,11 @@
 <body>
   <h1>{{ title }} 测试页面</h1>
   <main>
+    <i id="loading">
+      <p>前端正在载入……</p>
+      <p>若长时间无响应，请确认浏览器是否支持JavaScript。推荐使用Chrome或Edge打开。</p>
+    </i>
+    <div id="p0">{% block test %}{% endblock %}</div>
     <div id="p1">{% block p1 %}{% endblock %}</div>
     <div id="p2">{% block p2 %}{% endblock %}</div>
   </main>

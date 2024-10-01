@@ -1,7 +1,12 @@
+:root{
+  
+}
+
 /* reset */
-*{margin:auto}
-html,body{margin:0;padding:0;font-family:sans-serif}
-i{all:unset;display:block}
+*{margin:0}
+html,body{height:100%;padding:0;font-family:sans-serif}
+i,hr{all:unset;display:block}
+div{display:none}
 button{
   padding:3pt 9pt;
   cursor:pointer;
@@ -18,29 +23,79 @@ button{
 
 
 
-/* TODO : test, to delete */
-.testcolor{color:deeppink;background-color:lightblue;margin:9pt auto;line-height:2}
-
-
-/* client */
+/***** base *****/
 h1{
   font-size:21pt;
-  line-height:3;
+  line-height:63pt; /* DO NOT CHANGE */
+  padding:0;border:0;outline:0;
   text-align:center;
 }
-div{
-  display:flex;flex-direction:column;
-}
+main{height:calc(100% - 63pt)}
+#loading{
+  margin-top:30vh;
+  text-align:center;
+}#loading p:nth-of-type(1){font-size:18pt}
 
-
-
-/* p1 */
-pre{
+/* test */
+#p0{flex-direction:column}
+#p0 *{margin:auto}
+#p0 pre,#bash-log,#footbash{
   width:80vw; height:36vh;
   padding:9pt;
   background:#000;color:#ccc;
   overflow:auto;
 }
+#p0 .testcolor{min-width:36vw;text-align:center;color:deeppink;background:linear-gradient(in hsl longer hue 120deg,red 0 0);margin:9pt auto;line-height:3;border-radius:99pt}
+
+
+
+/***** p1 *****/
 #startbtn{font-size:16pt}
 
 
+
+
+/***** p2 *****/
+#p2{flex-direction:row;height:100%}
+#p2>i{
+  display:flex; flex-direction:column;
+  flex:1;
+  overflow:hidden;
+}
+
+#p2 pre{font-family:consolas}
+
+.code{
+  display:flex;
+  min-height:80%;
+  padding:0 9pt;
+  overflow:auto;
+  flex:9;
+}
+.code>*{margin:0 3pt;}
+.code>hr{
+  min-width:1pt;
+  height:auto;
+  border-radius:9pt;
+  background:#777;
+}
+.code pre{
+  font-size:12pt;
+  color:green;
+}
+.code #pre-lines{color:#777}
+.c-0{color:#000}
+.c-v{color:blueviolet}
+
+.run-wrap{display:flex;flex:3}
+#run{
+  margin:auto;
+  font-size:27pt;
+  padding:12pt 27pt;
+}
+
+#bash-log{
+  width:100%;height:100%;
+  font-size:18pt;font-weight:bold;
+}
+#bash-log span{color:aqua}
