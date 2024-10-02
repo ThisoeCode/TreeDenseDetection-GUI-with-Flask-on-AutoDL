@@ -7,9 +7,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="{{ url_for('static', filename='globals.js') }}"></script>
   {% block head %}{% endblock %}
+  <style> /* urls CSS */
+    #media-original,#media-predict{
+      background-image:url("{{ url_for('static', filename='img/_.png') }}");
+    }
+  </style>
 </head>
 <body>
   <h1>{{ title }} 测试页面</h1>
+  <button id="flip-page">切页</button>
   <main>
     <i id="loading">
       <p>前端正在载入……</p>

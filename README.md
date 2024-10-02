@@ -77,6 +77,9 @@ ssh ...
       "predict": "pre.jpg"
     }
 ! 注：预测结果图片输出在 root/public_html/img/ 文件夹下。
+- 将'?1'页左栏那样的文件名列在一个array中。
+  - 例：
+    mat_list = ['IMG_158.mat','IMG_167.mat','IMG_233.mat']
 - 
 
 ```

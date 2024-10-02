@@ -14,7 +14,11 @@ app = Flask(__name__)
 @app.route('/client', methods=['GET'])
 def index():
     
-    return render_template('index.html',title=title,bashLog=testmsg)
+    return render_template('index.html',
+    title=title,
+    bash_log=testmsg,
+    mat_list=['IMG_158.mat','IMG_167.mat','IMG_233.mat']
+    )
 
 
 if __name__ == "__main__":

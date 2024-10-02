@@ -30,6 +30,15 @@ h1{
   padding:0;border:0;outline:0;
   text-align:center;
 }
+#flip-page{
+  all:unset;
+  position:fixed;
+  top:3pt; right:9pt;
+  padding:3pt;
+  color:blue;
+  cursor: pointer;
+}#flip-page:hover{text-decoration:underline}
+
 main{height:calc(100% - 63pt)}
 #loading{
   margin-top:30vh;
@@ -50,8 +59,50 @@ main{height:calc(100% - 63pt)}
 
 
 /***** p1 *****/
-#startbtn{font-size:16pt}
+#p1{
+  width:100%; height:100%;
+  flex-direction:row;
+}
 
+aside{
+  display:flex;flex-direction:column;
+  flex:1;
+  padding:9pt;
+  min-width:99pt;
+  border:gray outset medium;
+  user-select:none;
+}
+aside>i{
+  width:calc(100% - 12pt);
+  padding:6pt;
+  color:navy; font-size:12pt;
+  line-height:1;
+  border:transparent inset 3px;
+}aside>i:hover{border-color:aqua;background:#eff;}
+aside img{height:12pt}
+
+.p1-main{
+  flex:5;
+  display:flex;flex-direction:column;
+}
+
+.media-wrap{
+  display:flex;flex-direction:row;
+  width:100%; height:50%;
+}
+.media-wrap>i{
+  flex:1;
+  margin:3pt; border:gray solid 3px;
+  /* TODO do delete */
+  background-img:'/static/_.png';background-size:cover;
+}
+
+
+
+
+#footbash{
+  vertical-align:bottom;
+}
 
 
 
