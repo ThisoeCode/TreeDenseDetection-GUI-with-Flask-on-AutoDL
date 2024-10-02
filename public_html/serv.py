@@ -6,7 +6,7 @@ testmsg = "[test] 测试Jinja2语法后端输出 \n\nImg name:  ['IMG_000'] Erro
 
 
 # MAIN
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, Response
 
 app = Flask(__name__)
 

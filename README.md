@@ -2,6 +2,11 @@
 <hr>
 
 # 目录
+
+> 快捷跳转：
+> [作业](#mission-for-teammates-你的作业)
+> [TODO](#thisoes-memo)
+
 - **[服务器使用说明（英文）](#documentation)**
   - [启动服务器的流程](#backend-launching)
 - **[开发团队任务书](#开发团队任务书)**
@@ -16,27 +21,29 @@
 
 ## Backend Launching
 
-1. Open an SSH, create tunnel at port `2000`.
+1. Check out repo diff, then upload updated source files through FTP.
+
+2. Open an SSH, create tunnel at port `2000`.
 ```bash
 cd /public_html
 chmod +x proxy_in_instance
 ./proxy_in_instance
 ```
 
-2. Open another SSH, run Flask app.
+3. Open another SSH, run Flask app.
 ```bash
 cd /public_html
 python serv.py
 ```
 
-3. Login to _AutoDL_ tunneling tool.
+4. Login to _AutoDL_ tunneling tool.
 ```bat
 ssh ...
 ::<password>
 2000
 ```
 
-4. Visit [`localhost:2000/client?0`](http://localhost:2000/client?0) for test result.
+5. Visit [`localhost:2000/client?0`](http://localhost:2000/client?0) for test result.
 
 
 
@@ -57,23 +64,31 @@ ssh ...
 > ps.
 > `+`完成； `-`待办； `!`进行中； `#`会议。
 
-### Mission for Teammates 你的作业（
+### Mission for Teammates 作业（
 ```diff
 + 平面设计前端布局
 + 在`serv.py`里`def`一个读取程序输出的数据的函数
-! 按版本区别更新ftp, 按[流程](#backend-launching-启动后端的流程)跑测试页
--
++ 按版本区别更新ftp, 按[流程](#backend-launching-启动后端的流程)跑测试页
+- 在`img.py`中def一个函数`get_img(id)`：
+  - 函数必需一个参数：图片编号`id`（如`536`）；
+  - 函数需返回`"GT_IMG_" + id + ".mat"`对应的路径辞典，辞典中包含`origin`（原始影像的路径）和`predict`（预测结果图片的路径），例如：
+    return {
+      "origin": "data.jpg",
+      "predict": "pre.jpg"
+    }
+! 注：预测结果图片输出在 root/public_html/img/ 文件夹下。
+- 
 
 ```
 
 ### Thisoe's memo
 ```diff
-+ 测试页: 测试`render_template`(CSS,JS)和后端变量发送到前端 <span
++ 测试页: 测试`render_template`(CSS,JS,和后端变量发送到前端)
 + 查找Flask是否动态渲染——持续接受后端数据以及前后端互动性问题
-! 双页面切换用jQuery在前端虚拟连接（下记为前提）
++ 双页面切换用jQuery在前端虚拟连接（下记为前提）
 ! 前端布局图代码化
 - jQuery建立SSE接口 `EventSource`
-# 联络teammates以确认数据类型
+! 联络teammates以确认数据类型
 - 建立后端SSE接口
 -
 
