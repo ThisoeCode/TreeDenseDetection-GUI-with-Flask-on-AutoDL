@@ -4,7 +4,7 @@
 # 目录
 
 > 快捷跳转：
-> [作业](#mission-for-teammates-你的作业)
+> [作业](#mission-for-teammates-作业)
 > [TODO](#thisoes-memo)
 
 - **[服务器使用说明（英文）](#documentation)**
