@@ -85,10 +85,12 @@ ssh ...
   （是为了向前端建立实时推流时捕获print内容）
 
 # 请决定：每次开机是否只允许test.py和train.py运行一次，若不是：
-? 将"test.py"和"train.py"末尾，一切执行结束时`print('ENDSTREAM', flush=True)`
+  ? 将"test.py"和"train.py"末尾，一切执行结束时`print('ENDSTREAM', flush=True)`
   （作为前端的推流终止旗标）
 
-- 
+- 测试`public_html\static\img\mat2png.py`
+  - 解除最后一行注释，跟`IMG_158.mat`一起上传ftp，运行并debug
+  - 输出的png在哪？是同文件夹下吗
 
 ```
 
@@ -98,9 +100,9 @@ ssh ...
 + 查找Flask是否动态渲染——持续接受后端数据以及前后端互动性问题
 + 双页面切换用jQuery在前端虚拟连接（下记为前提）
 ! 前端布局图代码化
-- jQuery建立SSE接口 `EventSource`
++ jQuery建立SSE接口 `EventSource`
 + 联络以确认数据类型
-- 建立后端SSE接口
+! 建立后端SSE接口
 + 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求
 # 等待决定：若test&train需运行多次，使用`threading.Lock()`并`global process`（记得在顶层`process = None`）
 - 测试数据推流全过程
