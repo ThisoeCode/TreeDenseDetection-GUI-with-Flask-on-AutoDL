@@ -33,7 +33,7 @@ h1{
 #flip-page{
   all:unset;
   position:fixed;
-  top:3pt; right:9pt;
+  top:3pt; left:9pt;
   padding:3pt;
   color:blue;
   cursor: pointer;
@@ -94,7 +94,16 @@ aside img{height:12pt}
   flex:1;
   margin:3pt; border:gray solid 3px;
   /* TODO do delete */
-  background-img:'/static/_.png';background-size:cover;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+}
+.media-wrap>i>i{
+  margin:0 9px;
+  font-size:18pt;
+  color:#000; font-weight:bold;
+  -webkit-text-stroke: 1px #fff;
+  user-select:none;
 }
 
 

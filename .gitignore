@@ -3,6 +3,7 @@
 .idea/
 TODO
 *.txt
+teammatedata/
 
 # env
 .env

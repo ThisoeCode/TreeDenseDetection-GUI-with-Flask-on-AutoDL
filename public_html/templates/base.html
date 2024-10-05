@@ -8,13 +8,13 @@
   <script src="{{ url_for('static', filename='globals.js') }}"></script>
   {% block head %}{% endblock %}
   <style> /* urls CSS */
-    #media-original,#media-predict{
+    .media-wrap>i{
       background-image:url("{{ url_for('static', filename='img/_.png') }}");
     }
   </style>
 </head>
 <body>
-  <h1>{{ title }} 测试页面</h1>
+  <h1>{{ title }}<span></span></h1>
   <button id="flip-page">切页</button>
   <main>
     <i id="loading">

@@ -69,7 +69,8 @@ ssh ...
 + 平面设计前端布局
 + 在`serv.py`里`def`一个读取程序输出的数据的函数
 + 按版本区别更新ftp, 按[流程](#backend-launching-启动后端的流程)跑测试页
-- 在`img.py`中def一个函数`get_img(id)`：
+
++ 在`img.py`中def一个函数`get_img(id)`：
   - 函数必需一个参数：图片编号`id`（如`536`）；
   - 函数需返回`"GT_IMG_" + id + ".mat"`对应的路径辞典，辞典中包含`origin`（原始影像的路径）和`predict`（预测结果图片的路径），例如：
     return {
@@ -77,9 +78,16 @@ ssh ...
       "predict": "pre.jpg"
     }
 ! 注：预测结果图片输出在 root/public_html/img/ 文件夹下。
-- 将'?1'页左栏那样的文件名列在一个array中。
-  - 例：
-    mat_list = ['IMG_158.mat','IMG_167.mat','IMG_233.mat']
++ 提供“模型运行”页以及“训练模型”页触发的`.py`文件相对路径
+
+- 需将"test.py"和"train.py"内的所有`print()`添加param:`flush=True`。见例：
+  print('Hello world', flush=True)
+  （是为了向前端建立实时推流时捕获print内容）
+
+# 请决定：每次开机是否只允许test.py和train.py运行一次，若不是：
+? 将"test.py"和"train.py"末尾，一切执行结束时`print('ENDSTREAM', flush=True)`
+  （作为前端的推流终止旗标）
+
 - 
 
 ```
@@ -91,9 +99,16 @@ ssh ...
 + 双页面切换用jQuery在前端虚拟连接（下记为前提）
 ! 前端布局图代码化
 - jQuery建立SSE接口 `EventSource`
-! 联络teammates以确认数据类型
++ 联络以确认数据类型
 - 建立后端SSE接口
++ 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求
+# 等待决定：若test&train需运行多次，使用`threading.Lock()`并`global process`（记得在顶层`process = None`）
+- 测试数据推流全过程
+- 将'?1'页左栏那样的文件名列在一个array中。
+  - 例：
+    mat_list = ['IMG_158.mat','IMG_167.mat','IMG_233.mat']
 -
+
 
 ```
 
