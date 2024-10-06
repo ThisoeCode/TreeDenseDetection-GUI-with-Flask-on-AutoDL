@@ -61,7 +61,7 @@ ssh ...
 ## TODO List & Roadmap
 
 > ps.
-> `+`完成； `-`待办； `!`进行中； `#`会议。
+> `+`完成； `-`待办； `!`进行中。
 
 ### Mission for Teammates 作业（
 ```diff
@@ -75,18 +75,16 @@ ssh ...
 #     "origin": "data.jpg",
 #     "predict": "pre.jpg"
 #   }
-! 注：预测结果图片输出在 root/public_html/img/ 文件夹下。
+! 注：预测结果图片最好输出在 root/public_html/img/ 文件夹下。
 + 提供“模型运行”页以及“训练模型”页触发的`.py`文件相对路径
 + 需将"test.py"和"train.py"内的所有`print()`添加param:`flush=True`。见例：
 # - print('Hello world', flush=True)
 #   （是为了向前端建立实时推流时捕获print内容）
-! 请决定：每次开机是否只允许test.py和train.py运行一次，若不是：
-# ? 将"test.py"和"train.py"末尾，一切执行结束时`print('ENDSTREAM', flush=True)`
-#   （作为前端的推流终止旗标）
-- 测试`public_html\static\img\mat2png.py`
++ 将"test.py"和"train.py"末尾，一切执行结束时`print('ENDSTREAM', flush=True)`（作为前端的推流终止旗标）
+- 找"conda activate " "source activate "问题原因和解决方案
+- 在test.py里内置.mat转.png的函数（参见 public_html\static\img\mat2png.py ）
 # - 解除最后一行注释，跟`IMG_158.mat`一起上传ftp，运行并debug
-# - Q.输出的png是同文件夹下吗？  A. _______
-
+- 提供 原始影像 和 预测结果 两个图片文件夹的绝对路径
 
 ```
 
@@ -100,12 +98,11 @@ ssh ...
 + 联络以确认数据类型
 + 建立后端SSE接口
 ! 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求
-! 等待决定：若test&train需运行多次，使用`threading.Lock()`并`global process`（记得在顶层`process = None`）
++ 等待讨论决定：结果：test&train仅允许运行一次
 ! 测试数据推流全过程
-- 将'?1'页左栏那样的文件名列在一个array中。
-# - 例：
-#   mat_list = ['IMG_158.mat','IMG_167.mat','IMG_233.mat']
--
+- '?1'页：用推流来的数据将.mat文件实时添加到左栏；
+# - stream()内寻找data含有 ["xxx"]  的部分，提取xxx +".mat"
+- （等待）单击.mat文件显示对应两种图片
 
 
 ```
@@ -157,4 +154,5 @@ subprocess.Popen(
 - 我不会用`subprocess.Popen`（[这么用了](https://github.com/ThisoeCode/TreeDenseDetection-GUI-with-Flask-on-AutoDL/blob/main/public_html/serv.py#L10)），问题有可能处在这？是否需要在`serv.py`执行bash时设置环境？的话，如何设置？
 
 ### GPT的解答待测试
-[这里](https://github.com/ThisoeCode/TreeDenseDetection-GUI-with-Flask-on-AutoDL/blob/main/public_html/serv.py#L71)第二个param的字符串最前添加`source ~/.bashrc && `
+1. 创建venv（`virtualenv venv`）；每运行serv.py前，开始
+2. [这里](https://github.com/ThisoeCode/TreeDenseDetection-GUI-with-Flask-on-AutoDL/blob/main/public_html/serv.py#L71)第二个param的字符串最前添加`source ~/.bashrc && conda activate ...`
