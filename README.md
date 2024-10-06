@@ -84,7 +84,7 @@ ssh ...
   print('Hello world', flush=True)
   （是为了向前端建立实时推流时捕获print内容）
 
-# 请决定：每次开机是否只允许test.py和train.py运行一次，若不是：
+! 请决定：每次开机是否只允许test.py和train.py运行一次，若不是：
   ? 将"test.py"和"train.py"末尾，一切执行结束时`print('ENDSTREAM', flush=True)`
   （作为前端的推流终止旗标）
 
@@ -102,10 +102,10 @@ ssh ...
 ! 前端布局图代码化
 + jQuery建立SSE接口 `EventSource`
 + 联络以确认数据类型
-! 建立后端SSE接口
-+ 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求
-# 等待决定：若test&train需运行多次，使用`threading.Lock()`并`global process`（记得在顶层`process = None`）
-- 测试数据推流全过程
++ 建立后端SSE接口
+! 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求
+! 等待决定：若test&train需运行多次，使用`threading.Lock()`并`global process`（记得在顶层`process = None`）
+! 测试数据推流全过程
 - 将'?1'页左栏那样的文件名列在一个array中。
   - 例：
     mat_list = ['IMG_158.mat','IMG_167.mat','IMG_233.mat']

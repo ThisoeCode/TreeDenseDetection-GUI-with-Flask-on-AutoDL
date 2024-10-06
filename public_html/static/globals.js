@@ -1,6 +1,7 @@
 $(_=>{
   // lib
   const
+    startMsg='（测试阶段）确定启动程序？',
     /** NewLine for pre text appending */
     preNL=`
 `   ,
@@ -26,7 +27,11 @@ $(_=>{
       if(isStreamin[_]){return false}
       return isStreamin[_]=true
     },
-    /** SSE Stream */ 
+    /**
+     * SSE Stream
+     * @param {string} api - API URL for streaming (ignore `/api/`)
+     * @param {string} $elem - Terminal output `<pre>` selector
+     */ 
     stream=(api,$elem)=>{
       // let isAutoScrollEnabled=true
       switch(api){
@@ -43,20 +48,23 @@ $(_=>{
       }
       const
         $pre = $($elem)[0],
-        E = new EventSource('/api/'+api)
-      // const autoScroll=_=>{
-      //   if(isAutoScrollEnabled){
-      //     $pre.scrollTop = $pre.scrollHeight
-      //   }
-      // }
-      // $($elem).append(preNL)
-      // $pre.on('scroll',_=>{
-      //   const
-      //     scrollOffset = $preElem.scrollTop + $preElem.clientHeight,
-      //     isAtBottom = scrollOffset >= $preElem.scrollHeight - 1
-      //   isAutoScrollEnabled = isAtBottom
-      // })
+        E = new EventSource('/api/'+api),
+        autoScroll=_=>{
+          if(isAutoScrollEnabled){
+            $pre.scrollTop = $pre.scrollHeight
+          }
+        }
+      $($elem).append(preNL)
+      $($elem).on('scroll',_=>{
+        const
+          scrollOffset = $preElem.scrollTop + $preElem.clientHeight,
+          isAtBottom = scrollOffset >= $preElem.scrollHeight - 1
+        isAutoScrollEnabled = isAtBottom
+      })
       E.onmessage = function(e){
+        if(e.data==="ENDSTREAM"){
+          return E.close()
+        }
         $pre.append(e.data+preNL)
         autoScroll()
       }
@@ -102,6 +110,13 @@ $(_=>{
     stream('ping','#p0 pre')
   })
 
-
-
+  // MODELS TRIGGERING & TERMINAL STREAMING
+  $('#submit1').click(_=>{
+    confirm(startMsg)
+      && stream('test','pre1')
+  })
+  $('#submit2').click(_=>{
+    confirm(startMsg)
+      && stream('train','pre2')
+  })
 })
