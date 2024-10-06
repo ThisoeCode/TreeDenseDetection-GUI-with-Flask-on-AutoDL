@@ -54,6 +54,7 @@ $(_=>{
             $pre.scrollTop = $pre.scrollHeight
           }
         }
+      let isAutoScrollEnabled = true
       $($elem).append(preNL)
       $($elem).on('scroll',_=>{
         const
@@ -63,6 +64,7 @@ $(_=>{
       })
       E.onmessage = function(e){
         if(e.data==="ENDSTREAM"){
+          console.log(`[STREAM::${api}] Stream end.`)
           return E.close()
         }
         $pre.append(e.data+preNL)
@@ -113,10 +115,12 @@ $(_=>{
   // MODELS TRIGGERING & TERMINAL STREAMING
   $('#submit1').click(_=>{
     confirm(startMsg)
-      && stream('test','pre1')
+      && stream('test','#pre1')
+    $('#submit1').prop('disabled',true).text('已执行')
   })
   $('#submit2').click(_=>{
     confirm(startMsg)
-      && stream('train','pre2')
+      // && stream('train','#pre2')
+    $('#submit2').prop('disabled',true).text('已执行')
   })
 })

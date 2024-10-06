@@ -5,10 +5,13 @@ TODO
 *.txt
 teammatedata/
 
+public_html/static/jquery.min.js
+
 # env
 .env
 .env.local
 env/
+venv/
 
 #test
 public_html/test.py

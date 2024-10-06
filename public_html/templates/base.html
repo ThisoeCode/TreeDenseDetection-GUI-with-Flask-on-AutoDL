@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='globals.css') }}">
   <title>{{ title }}</title>
   <link rel="icon" href="https://thisoe.dev/ico.ico">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
   <script src="{{ url_for('static', filename='globals.js') }}"></script>
   {% block head %}{% endblock %}
   <style> /* urls CSS */

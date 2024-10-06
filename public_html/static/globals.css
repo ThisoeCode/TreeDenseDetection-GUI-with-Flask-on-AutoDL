@@ -10,7 +10,7 @@ div{display:none}
 button{
   padding:3pt 9pt;
   cursor:pointer;
-}
+}button[disabled]{cursor:auto}
 
 ::-webkit-scrollbar{width:9px;height:9px;}
 ::-webkit-scrollbar-track{background-color:#ccc}
@@ -53,6 +53,7 @@ main{height:calc(100% - 63pt)}
   padding:9pt;
   background:#000;color:#ccc;
   overflow:auto;
+  text-wrap:wrap;
 }
 #p0 .testcolor{min-width:36vw;text-align:center;color:deeppink;background:linear-gradient(in hsl longer hue 120deg,red 0 0);margin:9pt auto;line-height:3;border-radius:99pt}
 

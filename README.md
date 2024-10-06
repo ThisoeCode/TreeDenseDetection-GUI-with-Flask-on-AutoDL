@@ -1,11 +1,10 @@
 <h1>树木密度监测模型的全栈推流展示GUI</h1>
-> #Flask #jQuery
+#Flask #jQuery
 
 # 目录
 
 > 快捷跳转：
-> [作业](#mission-for-teammates-作业)
-> [TODO](#thisoes-memo)
+> [作业](#mission-for-teammates-作业) / [TODO](#thisoes-memo) / **[遇难说明](#遇难presentation)**
 
 - **[服务器使用说明（英文）](#documentation)**
   - [启动服务器的流程](#backend-launching)
@@ -78,7 +77,7 @@ ssh ...
 #   }
 ! 注：预测结果图片输出在 root/public_html/img/ 文件夹下。
 + 提供“模型运行”页以及“训练模型”页触发的`.py`文件相对路径
-- 需将"test.py"和"train.py"内的所有`print()`添加param:`flush=True`。见例：
++ 需将"test.py"和"train.py"内的所有`print()`添加param:`flush=True`。见例：
 # - print('Hello world', flush=True)
 #   （是为了向前端建立实时推流时捕获print内容）
 ! 请决定：每次开机是否只允许test.py和train.py运行一次，若不是：
@@ -104,11 +103,58 @@ ssh ...
 ! 等待决定：若test&train需运行多次，使用`threading.Lock()`并`global process`（记得在顶层`process = None`）
 ! 测试数据推流全过程
 - 将'?1'页左栏那样的文件名列在一个array中。
-  - 例：
-    mat_list = ['IMG_158.mat','IMG_167.mat','IMG_233.mat']
+# - 例：
+#   mat_list = ['IMG_158.mat','IMG_167.mat','IMG_233.mat']
 -
 
 
 ```
 
+## 遇难presentation()
 
+- 两人团队，甲负责模型，乙负责web前后端。
+
+- 是Linux。
+
+### Torch模型 `test.py`
+在`/root/code_TreeFormer/`文件夹下，有`test.py`用于执行torch模型，会实时print出数据。
+
+> 运行方法：SSH执行指令`conda activate 0831_env_AdaTreeFormer`然后`python xxxxx/test.py`，**能正常执行**。
+
+### Flask后端 `serv.py`
+在`/root/public_html/`文件夹下，有Flask后端`serv.py`。
+其中有API路由要执行`test.py`并将其print的内容实时推流到前端，于是包括来自`test.py`的报错在内的所有print都会在前端显示。
+
+代码片段：
+```py
+import subprocess
+subprocess.Popen(
+    # 注意这里是`source activate ...`
+    "bash -c 'source activate env_TreeFormer && python /root/code_TreeFormer/test.py'",
+    shell=True,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    text=True,
+    bufsize=1
+)
+# ...
+```
+（[见源代码](https://github.com/ThisoeCode/TreeDenseDetection-GUI-with-Flask-on-AutoDL/blob/main/public_html/serv.py#L71)）
+
+可以成功运行（前端能实时显示来自`test.py`的print），但会报以下错，并没有traceback提示到底哪里出了问题）
+```diff
+- ERROR: /root/miniconda3/envs/env_TreeFormer/lib/python3.8/site-packages/torch/functional.py:568: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2228.)
+```
+
+尝试了将代码中的 ...`"bash -c 'source activate `... 改成 ...`"bash -c 'conda activate `... 则会报错说找不到"conda"。
+
+### 无知者无畏（bushi
+
+- 我们俩都不会使`virtualenv`，我没啥Python和Linux基础知识 只会JS/TS/PHP那些web的东西，Flask这回是头回碰。
+
+创`public_html/`的时候，在该文件夹下SSH过`virtualenv venv`并activate。后来删了`venv/`文件夹再运行，结果没差别。
+
+- 我不会用`subprocess.Popen`（[这么用了](https://github.com/ThisoeCode/TreeDenseDetection-GUI-with-Flask-on-AutoDL/blob/main/public_html/serv.py#L10)），问题有可能处在这？是否需要在`serv.py`执行bash时设置环境？的话，如何设置？
+
+### GPT的解答待测试
+[这里](https://github.com/ThisoeCode/TreeDenseDetection-GUI-with-Flask-on-AutoDL/blob/main/public_html/serv.py#L71)第二个param的字符串最前添加`source ~/.bashrc && `
