@@ -50,7 +50,7 @@ main{height:calc(100% - 63pt)}
 #p0 *{margin:auto}
 #p0 pre,#pre2,#pre1{
   width:80vw; height:36vh;
-  padding:9pt;
+  padding:9pt; padding-bottom:39pt;
   background:#000;color:#ccc;
   overflow:auto;
   text-wrap:wrap;
@@ -94,7 +94,6 @@ aside img{height:12pt}
 .media-wrap>i{
   flex:1;
   margin:3pt; border:gray solid 3px;
-  /* TODO do delete */
   background-size:contain;
   background-repeat:no-repeat;
   background-position:center;

@@ -33,7 +33,7 @@ def execute_and_capture(bash: str):
     except Exception as e:
         print(f"Failed to execute: {e}")
 
-def sse(path: str, bash=''):
+def SSE(path: str, bash=''):
     if bash == '':
         cmd=f"bash -c 'python {path}'"
     else:
@@ -63,16 +63,16 @@ def index():
 # API
 @app.route('/api/ping')
 def stream_ping():
-    return sse('test_streaming.py')
+    return SSE('test_streaming.py')
 
 @app.route('/api/test')
 def stream_test():
-    #      ...           ...          ...             , ' conda activate ... '
-    return sse('/root/0831_code_AdaTreeFormer/test.py', 'source activate 0831_env_AdaTreeFormer')
+    #      ...           ...          ...             , '                    conda activate ... '
+    return SSE('~/0831_code_AdaTreeFormer/test.py', 'source ~/miniconda3/bin/activate 0831_env_AdaTreeFormer')
 
 @app.route('/api/train')
 def stream_train():
-    return sse('/root/0831_code_AdaTreeFormer/train.py', 'source activate 0831_env_AdaTreeFormer')
+    return SSE('~/0831_code_AdaTreeFormer/train.py', 'source ~/miniconda3/bin/activate 0831_env_AdaTreeFormer')
 
 
 if __name__ == "__main__":
