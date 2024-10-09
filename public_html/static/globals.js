@@ -7,7 +7,6 @@ $(_=>{
 `   ,
     $flex=_=>$(_).css('display','flex'),
     get=_=>(new URLSearchParams(window.location.search)).get(_)==='',
-    preLines=$('#pre-code').html().split(/\n/).length,
     flipTitle=_=>{$('h1>span').text(
       _===1
         ?' 模型运行'
@@ -98,11 +97,6 @@ $(_=>{
       ?flipTo(2)
       :flipTo(1)
   })
-
-  for(let j=1; j<=preLines; j++){
-    preCtt+=j+preNL
-  }
-  $('#pre-lines').text(preCtt)
 
 
 

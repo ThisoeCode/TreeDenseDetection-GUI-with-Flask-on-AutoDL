@@ -2,9 +2,7 @@
 {% block test %}
 
 <pre>{{ bash_log }}</pre>
-
 <p class="testcolor">测试 CSS</p>
-
 <button id="testjs">测试 JS</button>
 
 {% endblock %}
@@ -50,24 +48,9 @@ bash
 
 {% block p2 %}
 
-<!-- #p2/i1 -->
-<i>
-  <i class="code">
-<pre id="pre-lines">f\nf</pre> <hr>
-<pre id="pre-code"><span class="c-0">(</span><span class="c-v">description</span><span class="c-0">=</span>'Train'<span class="c-0">)</span>
- '--data-dir'<span class="c-0">, </span><span class="c-v">default</span><span class="c-0">=</span>'data'<span class="c-0">, </span><span class="c-v">help</span><span class="c-0">=</span>'data path'<span class="c-0">)</span>
- '--data-dir-shot'<span class="c-0">, </span><span class="c-v">default</span><span class="c-0">=</span>'data'<span class="c-0">, </span><span class="c-v">help</span><span class="c-0">=</span>'data path'<span class="c-0">)</span>
- 
- '--dataset'<span class="c-0">, </span><span class="c-v">default</span><span class="c-0">=</span>'TC'<span class="c-0">
-
-</pre>
-  </i>
-  <i class="s2-wrap"><button id="submit2">执行</button></i>
-</i>
-
-<!-- #p2/i2 -->
 <i><pre id="pre2">
 <span>> </span>BASH LOG
+{{ pre2 }}
 </pre></i>
 
 {% endblock %}

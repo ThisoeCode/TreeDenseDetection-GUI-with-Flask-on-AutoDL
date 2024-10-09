@@ -31,8 +31,7 @@ chmod +x proxy_in_instance
 
 3. Open another SSH, run Flask app.
 ```bash
-cd public_html
-python serv.py
+python public_html/serv.py
 ```
 
 4. Login to _AutoDL_ tunneling tool.
@@ -55,7 +54,7 @@ ssh ...
 ### 检查版本区别并更新ftp时忽略以下文件
 - `README.md` - GitHub说明文档
 - `.gitignore` - Git配置
-- `LOCALTEST.bat` - 项目运行测试启动器（Windows用）
+- `LOCALTEST.bat`和`serv_localtest.py` - 项目运行测试启动器（Windows用）
 
 
 ## TODO List & Roadmap
@@ -80,13 +79,14 @@ ssh ...
 # - print('Hello world', flush=True)
 #   （是为了向前端建立实时推流时捕获print内容）
 + 将"test.py"和"train.py"末尾，一切执行结束时`print('ENDSTREAM', flush=True)`（作为前端的推流终止旗标）
-! 在test.py里内置.mat转.png的函数（参见 public_html\static\img\mat2png.py ）
-# - 解除最后一行注释，跟`IMG_158.mat`一起上传ftp，运行并debug
 + 提供 “?2” 页（train.py模拟运行）所需log数据
 + 提供 原始影像 和 预测结果 两个图片文件夹的绝对路径
 # - ~~~/predictions_images #预测结果
 # - ~~~/test_data/images #原始影像
+! 在test.py里内置.mat转.png的函数（参见 public_html\static\img\mat2png.py ）
+# - 解除最后一行注释，跟`IMG_158.mat`一起上传ftp，运行并debug
 
+- 提供模型名称清单
 - 《修改模型-后端部分》在test.py内选择
 # - 方法1：parser.add_argument
 # - 方法2：os.getenv('SELECTED_MODEL')
