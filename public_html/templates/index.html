@@ -11,33 +11,25 @@
 
 {% block p1 %}
 
-<aside>
-  {% for j in mat_list %}
-    <i>
-      <img src="{{ url_for('static', filename='img/ico_mat.png') }}"></img>
-      {{ j }}
-    </i>
-  {% endfor %}
-</aside>
+<aside></aside>
 <i class="p1-main">
   <i class="media-wrap">
-    <i id="media-original"><i>原始影像</i></i>
-    <i id="media-predict"><i>预测结果</i></i>
+    <i id="media-ori"><i>原始影像</i></i>
+    <i id="media-pre"><i>预测结果</i></i>
   </i>
   <i class="foot">
     <i class="form">
       <i class="select-wrap">
         <select name="model">
-          <option value="1">模型甲</option>
-          <option value="2">模型乙</option>
-          <option value="3">模型丙</option>
-          <option value="4">模型丁</option>
+          <option value="m0">选择模型...</option>
+          <option value="model_mae-30.82_epoch-77.pth">mae-30.82 epoch-77</option>
+          <option value="model_mae-110.47_epoch-62.pth">mae-110.47 epoch-62</option>
         </select>
       </i>
-      <i class="s1-wrap"><button id="submit1">执行</button></i>
+      <button id="submit1" disabled>执行</button>
     </i>
 <i class="pre1-wrap"><pre id="pre1">
-bash
+> bash
 </pre></i>
   </i>
 </i>
@@ -48,9 +40,18 @@ bash
 
 {% block p2 %}
 
-<i><pre id="pre2">
-<span>> </span>BASH LOG
-{{ pre2 }}
-</pre></i>
+<i id="fake-cmd">
+  <i id="fc-head">
+    <i><i style="background:transparent;font-family:serif;font-weight:bold;white-space:nowrap;">Shell - train</i></i>
+    <i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </i>
+  </i>
+  <i class="pre2">
+    <pre id="pre2">{{ pre2 }}</pre>
+  </i>
+</i>
 
 {% endblock %}

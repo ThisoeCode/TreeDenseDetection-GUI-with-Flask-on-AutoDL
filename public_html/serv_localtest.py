@@ -1,8 +1,8 @@
 import subprocess
-from flask import Flask, render_template, url_for, Response
+from flask import Flask, render_template,url_for,request,Response,send_file
 
 # ------- CONFIG ------- #
-from serv import title,testmsg,streamtype,pre2,execute_and_capture
+from serv import title,testmsg,streamtype,img_dir,pre2,execute_and_capture
 
 testpre1="""
 number of img [val]: 161
@@ -68,7 +68,7 @@ Img name:  ['IMG_913'] Error:  13.6253662109375 GT count:  92 Model out:  78.374
 Img name:  ['IMG_914'] Error:  -21.009613037109375 GT count:  181 Model out:  202.00961303710938
 Img name:  ['IMG_917'] Error:  1.11895751953125 GT count:  151 Model out:  149.88104248046875
 Img name:  ['IMG_918'] Error:  -24.401611328125 GT count:  199 Model out:  223.401611328125
-/root/autodl-tmp/save-dir_wurenji/best_model_mae-30.82_epoch-77.pth: mae=15.405208184852363, mse=19.78529700995695, R2=0.8175054791286568, pre=0.0, rec=0.0, f1=nan
+best_model_mae-30.82_epoch-77.pth: mae=15.405208184852363, mse=19.78529700995695, R2=0.8175054791286568, pre=0.0, rec=0.0, f1=nan
 
 end!
 """

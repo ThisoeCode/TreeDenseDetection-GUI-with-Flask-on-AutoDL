@@ -1,6 +1,7 @@
 # Thisoe ignores
 .vscode/
 .idea/
+*/__pycache__
 TODO
 *.txt
 teammatedata/

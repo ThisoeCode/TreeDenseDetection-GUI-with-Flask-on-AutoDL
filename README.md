@@ -67,13 +67,6 @@ ssh ...
 + 平面设计前端布局
 + 在`serv.py`里`def`一个读取程序输出的数据的函数
 + 按版本区别更新ftp, 按[流程](#backend-launching-启动后端的流程)跑测试页
-+ 在`img.py`中def一个函数`get_img(id)`：
-# - 函数必需一个参数：图片编号`id`（如`536`）；
-# - 函数需返回`"GT_IMG_" + id + ".mat"`对应的路径辞典，辞典中包含`origin`（原始影像的路径）和`predict`（预测结果图片的路径），例如：
-#   return {
-#     "origin": "data.jpg",
-#     "predict": "pre.jpg"
-#   }
 + 提供“模型运行”页以及“训练模型”页触发的`.py`文件相对路径
 + 需将"test.py"和"train.py"内的所有`print()`添加param:`flush=True`。见例：
 # - print('Hello world', flush=True)
@@ -83,10 +76,10 @@ ssh ...
 + 提供 原始影像 和 预测结果 两个图片文件夹的绝对路径
 # - ~~~/predictions_images #预测结果
 # - ~~~/test_data/images #原始影像
+
++ 提供模型名称清单
 ! 在test.py里内置.mat转.png的函数（参见 public_html\static\img\mat2png.py ）
 # - 解除最后一行注释，跟`IMG_158.mat`一起上传ftp，运行并debug
-
-- 提供模型名称清单
 - 《修改模型-后端部分》在test.py内选择
 # - 方法1：parser.add_argument
 # - 方法2：os.getenv('SELECTED_MODEL')
@@ -106,10 +99,10 @@ ssh ...
 + 等待讨论决定：结果：test&train仅允许运行一次
 + 测试数据推流全过程
 
++ 按照会议决定修改“?2”页前端
 ! “?1” 页：用推流来的数据将.mat文件实时添加到左栏；
 # - stream()内寻找data含有 ["xxx"]  的部分，提取xxx +".mat"
 ! （等待）单击.mat文件显示对应两种图片
-! 按照会议决定修改“?2”页前端
 
 + 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求
 - 《修改模型-前端部分》选择模型
