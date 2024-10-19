@@ -7,14 +7,17 @@ $(_=>{
 
 
 
-  // lib
+  // config && lib
   let
-    is1Subbed=false
+    is1Subbed=false,
+    load_dots='',
+    load_itv =null
 
   const
     /** NewLine for pre text appending */
     preNL=`
 `   ,
+    regimg=/Img name:\s*\['(.*?)'\]/,
     startMsg=_=>`确定启动 ${_} 模型？`,
     $flex=_=>$(_).css('display','flex'),
     get=_=>(new URLSearchParams(window.location.search)).get(_)==='',
@@ -37,10 +40,10 @@ $(_=>{
       if(isStreamin[_]){return false}
       return isStreamin[_]=true
     },
-    mod=(txt,str,color)=>{
+    mod=(txt,str,color)=>{ if(str){
       reg=new RegExp(str,'g')
       return txt.replace(reg,`<span style="color:${color}">${str}</span>`)
-    },
+    }},
     modPre=(pre,str,color)=>{
       $(pre).html(mod($(pre).html(),str,color))
     },
@@ -54,11 +57,25 @@ $(_=>{
       ['THISOE_PYERROR','red'],
     ],
     listImg=line=>{
-      const match = line.match(/Img name: \s*\('(.*?)',\)/)
+      const match = line.match(regimg)
       match&&match[1]&&
-        $('#mydiv').append(
-          `<i i="${match[1]}"><img alt="data" src="public_html/static/img/ico_mat.png"><span>${match[1]}.mat</span></i>`
+        $('aside').append(
+          `<i i="${match[1]}"><img alt="data" src="/static/img/ico_mat.png"><span>${match[1]}.mat</span></i>`
         )
+    },
+    /** @param {boolean} _ - truthy for starting, falsy for stopping */
+    loaddotsAnime=_=>{
+      if(_){ if(!load_itv){
+        load_itv=setInterval(_=>{
+          load_dots=load_dots.length<3 ? load_dots+'•' : ''
+          $('.loaddots').text(load_dots)
+        },233)
+      }}else{
+        clearInterval(load_itv)
+        load_itv=null
+        load_dots=''
+        $('.loaddots').text('')
+      }
     },
     /**
      * SSE Stream
@@ -88,7 +105,7 @@ $(_=>{
           }
         }
       let isAutoScrollEnabled = true
-      $($elem).append(preNL)
+      loaddotsAnime(1)
       $($elem).on('scroll',_=>{
         const
           scrollOffset = $pre.scrollTop + $pre.clientHeight,
@@ -99,14 +116,19 @@ $(_=>{
         let ln = e.data||''
         if(ln==="ENDSTREAM"){
           console.log(`[STREAM::${api}] Stream end.`)
+          loaddotsAnime(0)
+          $($elem).append(preNL+mod("&gt; bash","&gt;",'aqua'))
           return E.close()
         }
+        api==='test'&& listImg(ln)
+        // `mod()` Add color
         for(let j=0; j<modConf.length; j++){
           ln=mod(ln,modConf[j][0],modConf[j][1])
         }
-        $($elem).append(ln+preNL)
+        // const modimg=ln.match(regimg)
+        // modimg&&modimg[1]&&mod(ln,modimg[1],'aquamarine')
+        $($elem+' .loaddots').before(ln+preNL)
         autoScroll()
-        api==='test'&& listImg(ln)
       }
     },
     toggleSub=_=>{
@@ -119,6 +141,7 @@ $(_=>{
 
 
   // init
+  $('#github').click(_=>window.open('https://github.com/ThisoeCode/TreeDenseDetection-GUI-with-Flask-on-AutoDL'))
   toggleSub()
   get('1')
     ?(_=>{$flex('#p1')
@@ -141,10 +164,15 @@ $(_=>{
       :flipTo(1)
   })
 
-  $('aside').on('click','i',function(_){
-    imgName=$(this).attr('i')
-    $('#media-ori').css('background-image',`/api/img?dir=ori&img=${imgName}.jpg`)
-    $('#media-pre').css('background-image',`/api/img?dir=pre&img=${imgName}.png`)
+  // show IMG
+  $('aside').on('click','i',function(){
+    const
+      imgName=$(this).attr('i'),
+      bg='background-image',
+      img=_=>`url(/api/img?dir=${_}&img=${imgName})`
+    $('#media-ori').css(bg,img('ori'))
+    $('#media-pre').css(bg,img('pre'))
+    console.log(imgName)
   })
 
 

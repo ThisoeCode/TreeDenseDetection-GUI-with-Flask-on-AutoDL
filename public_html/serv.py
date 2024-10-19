@@ -5,7 +5,7 @@ from flask import Flask, render_template,url_for,request,Response,send_file,abor
 # ------- CONFIG ------- #
 title="树木密度监测"
 mroot='~/0831_code_AdaTreeFormer/'
-img_dir=[mroot+'test_data/images/',mroot+'/predictions_images/']
+img_dir=[mroot+'data/test_data/images/',mroot+'predictions_images/']
 streamtype='text/event-stream'
 testmsg = "[test] 测试Jinja2语法后端输出 \n\nImg name:  ['IMG_000'] Error:  0.0 GT count:  0 Model out:  0.0\nImg name:  ['IMG_000'] Error:  0.0 GT count:  0 Model out:  0.0\nImg name:  ['IMG_000'] Error:  0.0 GT count:  0 Model out:  0.0000001\n\n"
 pre2="""
@@ -136,20 +136,25 @@ def stream_test():
 def get_img():
     folder = request.args.get('dir')
     img = request.args.get('img')
+    itype = 'jpg'
     if not img or not folder:
         abort(400, description="Missing param")
     if folder=="ori":
-        file_path=img_dir[0]+img
+        file_path=os.path.expanduser(img_dir[0]+img+'.'+itype)
     elif folder=="pre":
-        file_path=img_dir[1]+img
+        itype = 'png'
+        file_path=os.path.expanduser(img_dir[1]+img+'.'+itype)
     else:
         abort(400, description="Invalid param")
     if os.path.exists(file_path):
-        return send_file(file_path, mimetype='image/png')
+        return send_file(file_path, mimetype='image/'+itype)
     else:
-        abort(404, description="IMG not found")
+        abort(404, description="IMG NF: "+file_path)
 
 
 # ------- SERV ------- #
 if __name__ == "__main__":
-    app.run(debug=True, port=2000)
+    app.run(
+        # debug=True,
+        port=2000
+    )

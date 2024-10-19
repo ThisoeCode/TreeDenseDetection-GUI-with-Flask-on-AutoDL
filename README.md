@@ -60,7 +60,7 @@ ssh ...
 ## TODO List & Roadmap
 
 > ps.
-> `+`完成； `-`待办； `!`进行中。
+> `+`完成； `-`待办； `!`进行中；`#`注释。
 
 ### Mission for Teammates 作业（
 ```diff
@@ -78,12 +78,14 @@ ssh ...
 # - ~~~/test_data/images #原始影像
 
 + 提供模型名称清单
-! 在test.py里内置.mat转.png的函数（参见 public_html\static\img\mat2png.py ）
++ 在test.py里内置.mat转.png的函数（参见 public_html\static\img\mat2png.py ）
 # - 解除最后一行注释，跟`IMG_158.mat`一起上传ftp，运行并debug
-- 《修改模型-后端部分》在test.py内选择
++ 《修改模型-后端部分》在test.py内选择
 # - 方法1：parser.add_argument
 # - 方法2：os.getenv('SELECTED_MODEL')
 
+! 最终debug
+- 测试product版后端，查收成品
 ```
 
 ### Thisoe's memo
@@ -100,15 +102,13 @@ ssh ...
 + 测试数据推流全过程
 
 + 按照会议决定修改“?2”页前端
-! “?1” 页：用推流来的数据将.mat文件实时添加到左栏；
++ “?1” 页：用推流来的数据将.mat文件实时添加到左栏；
 # - stream()内寻找data含有 ["xxx"]  的部分，提取xxx +".mat"
-! （等待）单击.mat文件显示对应两种图片
++ （等待）单击.mat文件显示对应两种图片
 
-+ 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求
-- 《修改模型-前端部分》选择模型
-# - 方法1：parser.add_argument
-# - 方法2：os.getenv('SELECTED_MODEL')
++ 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求=
 
-
-
+! 最终debug
+- 修改serv.py为product，上交成品
+# - 删掉 `app.run` 的 `debug=True`
 ```
