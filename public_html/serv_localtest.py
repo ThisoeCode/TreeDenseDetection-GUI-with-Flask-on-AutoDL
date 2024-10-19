@@ -109,4 +109,4 @@ def stream_train():
 
 # ------- SERV ------- #
 if __name__ == "__main__":
-    app.run(debug=True, port=2333)
+    app.run(port=2333)

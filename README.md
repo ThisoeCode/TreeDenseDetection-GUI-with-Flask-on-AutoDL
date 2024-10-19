@@ -1,5 +1,5 @@
-<h1>树木密度监测模型的全栈推流展示GUI<br>Tree Density Model: Full-Stack Live-Streaming Presentation GUI</h1>
-#Flask #jQuery #PyTorch
+<h1>树木密度监测模型的推流展示GUI全栈<br>Tree-Density Model: Full-Stack Bash Streaming Presentation GUI</h1>
+#Flask #jQuery
 
 # 目录
 
