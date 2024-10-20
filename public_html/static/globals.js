@@ -10,16 +10,21 @@ $(_=>{
   // config && lib
   let
     is1Subbed=false,
+    is2Subbed=false,
     load_dots='',
     load_itv =null
 
   const
+    regimg=/Img name:\s*\['(.*?)'\]/,
+    p2aTime=[233,33, 2333,99],
+    p2aEpoch=[4, 4,3, 4,3, 3,4,3],
+
     /** NewLine for pre text appending */
     preNL=`
 `   ,
-    regimg=/Img name:\s*\['(.*?)'\]/,
     startMsg=_=>`确定启动 ${_} 模型？`,
     $flex=_=>$(_).css('display','flex'),
+    $p2=$('#pre2'),
     get=_=>(new URLSearchParams(window.location.search)).get(_)==='',
     flipTitle=_=>{$('h1>span').text(
       _===1
@@ -64,10 +69,10 @@ $(_=>{
         )
     },
     /** @param {boolean} _ - truthy for starting, falsy for stopping */
-    loaddotsAnime=_=>{
+    loaddotsAnim=_=>{
       if(_){ if(!load_itv){
         load_itv=setInterval(_=>{
-          load_dots=load_dots.length<3 ? load_dots+'•' : ''
+          load_dots=load_dots.length<3 ? load_dots+'*' : ''
           $('.loaddots').text(load_dots)
         },233)
       }}else{
@@ -77,13 +82,29 @@ $(_=>{
         $('.loaddots').text('')
       }
     },
+
+    autoScroll=$_=>{
+      const
+        ht=$_[0],
+        ASE=_=>$_.data('isAutoScrollEnabled',_)
+      ASE(true)
+      $_.off('scroll').on('scroll',_=>{
+        const
+          scrollOffset = ht.scrollTop + ht.clientHeight,
+          isAtBottom = scrollOffset >= ht.scrollHeight - 1
+        ASE(isAtBottom)
+      })
+      if($_.data('isAutoScrollEnabled')){
+        ht.scrollTop = ht.scrollHeight
+      }
+    },
+
     /**
      * SSE Stream
      * @param {string} api - API URL for streaming (ignore `/api/`)
-     * @param {string} $elem - Terminal output `<pre>` selector
+     * @param {string} elem - Terminal output `<pre>` selector
      */
-    haisin=(api,$elem)=>{
-      // let isAutoScrollEnabled=true
+    haisin=(api,elem)=>{
       switch(api){
         case 'test':
           if(!checkStream(1)){return null}
@@ -96,28 +117,14 @@ $(_=>{
           break
         default:return null
       }
-      const
-        $pre = $($elem)[0],
-        E = new EventSource('/api/'+api),
-        autoScroll=_=>{
-          if(isAutoScrollEnabled){
-            $pre.scrollTop = $pre.scrollHeight
-          }
-        }
-      let isAutoScrollEnabled = true
-      loaddotsAnime(1)
-      $($elem).on('scroll',_=>{
-        const
-          scrollOffset = $pre.scrollTop + $pre.clientHeight,
-          isAtBottom = scrollOffset >= $pre.scrollHeight - 1
-        isAutoScrollEnabled = isAtBottom
-      })
+      const E = new EventSource('/api/'+api)
+      loaddotsAnim(1)
       E.onmessage = function(e){
         let ln = e.data||''
         if(ln==="ENDSTREAM"){
           console.log(`[STREAM::${api}] Stream end.`)
-          loaddotsAnime(0)
-          $($elem).append(preNL+mod("&gt; bash","&gt;",'aqua'))
+          loaddotsAnim(0)
+          $(elem).append(preNL+mod("&gt; bash","&gt;",'aqua'))
           return E.close()
         }
         api==='test'&& listImg(ln)
@@ -127,8 +134,8 @@ $(_=>{
         }
         // const modimg=ln.match(regimg)
         // modimg&&modimg[1]&&mod(ln,modimg[1],'aquamarine')
-        $($elem+' .loaddots').before(ln+preNL)
-        autoScroll()
+        $(elem+' .loaddots').before(ln+preNL)
+        autoScroll($(elem))
       }
     },
     toggleSub=_=>{
@@ -156,13 +163,79 @@ $(_=>{
           flipTitle(0)
         })()
         :flipTo(1)
-  $('#loading').hide()
-
   $('#flip-page').click(_=>{
     get('1')
       ?flipTo(2)
       :flipTo(1)
   })
+
+  // pre mods
+  modPre($('#pre1'),'&gt; ','aqua')
+  modPre($p2,'&gt; ','aquamarine')
+  modPre($p2,'end!','aqua')
+  modPre($p2,'INFO','green')
+  modPre($p2,'Loss: ','#cca')
+
+  // p2 bash anim
+  const
+    p2 = $p2.html().split(preNL),
+    p2Anim=_=>{
+      if(is2Subbed){return false}
+      is2Subbed=true
+      let j=1, iEP=0, itv3=[]
+      class Pre2I3 {
+        constructor(initEP){
+          this.EP=initEP
+          this.limit=p2aEpoch[initEP]
+          this.i=1
+          this.itv=
+          setInterval(_=>{
+            if(!p2[j]){
+              this.stop()
+              return false
+            }
+            $p2.append(p2[j++]+preNL)
+            autoScroll($p2)
+            this.i++ === this.limit && this.stop()
+            p2[j] || this.stop()
+          },p2aTime[3])
+          return this.itv
+        }
+        stop(){clearInterval(this.itv)}
+      }
+      setTimeout(_=>{
+        // --- 1 ----
+        const itv1 = setInterval(_=>{
+          $p2.append(p2[j++]+preNL)
+          autoScroll($p2)
+          // --- 2 ----
+          if(j>25){
+            clearInterval(itv1)
+            $p2.append(p2[j++]+preNL+p2[j++]+preNL)
+            autoScroll($p2)
+            const itv2 = setInterval(_=>{
+              // --- 3 ----
+              $p2.append(preNL)
+              itv3[iEP] = new Pre2I3(iEP)
+              if(++iEP === p2aEpoch.length){
+                setTimeout(_=>{
+                  clearInterval(itv2)
+                  while(p2[j+3]!==undefined){
+                    $p2.append(p2[++j]+preNL)
+                  }
+                  autoScroll($p2)
+                  is2Subbed=false
+                },p2aTime[2])
+              }
+            },p2aTime[2])
+          }
+        },p2aTime[1]+Math.floor(Math.random()*9))
+      },p2aTime[0])
+    }
+  $p2.html(p2[0])
+  $('#fc-menu button').click(p2Anim)
+
+  $('#loading').hide()
 
   // show IMG
   $('aside').on('click','i',function(){
@@ -172,7 +245,6 @@ $(_=>{
       img=_=>`url(/api/img?dir=${_}&img=${imgName})`
     $('#media-ori').css(bg,img('ori'))
     $('#media-pre').css(bg,img('pre'))
-    console.log(imgName)
   })
 
 
@@ -187,11 +259,4 @@ $(_=>{
       $('select').prop('disabled',true)
     }
   })
-
-  // pre mods
-  modPre($('#pre1'),'&gt; ','aqua')
-  modPre($('#pre2'),'&gt; ','aquamarine')
-  modPre($('#pre2'),'end!','aqua')
-  modPre($('#pre2'),'INFO','green')
-  modPre($('#pre2'),'Loss: ','#cca')
 })

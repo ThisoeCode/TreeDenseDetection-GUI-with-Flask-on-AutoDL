@@ -118,17 +118,17 @@ select,#submit1{font-size:16pt}
 
 
 /***** p2 *****/
-#p2{height:100%}
+#p2{height:100%;width:100%}
 
 #fake-cmd{
   flex-direction:column;
-  margin:3vh 6vw 9vh;
+  margin:3vh auto 9vh;
   border-radius:7pt; overflow:hidden;
 }
 #fc-head{
   user-select:none;
   justify-content:space-between;
-  background:#aaa;
+  background:#ccc;
   width:100%;
   min-height:27pt;
 }#fc-head>i{margin:0 9pt;align-items:center}
@@ -139,9 +139,17 @@ select,#submit1{font-size:16pt}
   background:#178577;
 }
 
+#fc-menu{border:#aaa solid thin;background:#eee}
+#fc-menu>button{
+  all:unset;
+  padding:3pt 9pt;
+  border-right:#aaa solid thin;
+  cursor:pointer;
+}#fc-menu>button:hover{background:#fff}
+
 .pre2{height:calc(100% - 27pt)}
 #pre2{
-  width:auto;height:auto;
+  width:81vw;height:auto;
   font-family:consolas;
-  font-size:18pt;
+  font-size:16pt;
 }

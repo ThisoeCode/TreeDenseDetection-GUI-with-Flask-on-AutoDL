@@ -5,7 +5,7 @@ print('Random number spittin...')
 TEST
 """
 j=0
-k=9
+k=39
 while True:
     print("data: ['"+str(random.randint(10000, 999999))+"']", flush=True)
     time.sleep(1)

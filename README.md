@@ -55,11 +55,11 @@ Visit [localhost:2000/client?1](http://localhost:2000/client?1).
 > ps.
 > `+`完成； `-`待办； `!`进行中；`#`注释。
 
-### Mission for Teammates 作业（
+### Torch Model Missions (Teammates)
 ```diff
 + 平面设计前端布局
 + 在`serv.py`里`def`一个读取程序输出的数据的函数
-+ 按版本区别更新ftp, 按[流程](#backend-launching-启动后端的流程)跑测试页
++ 按版本区别更新ftp, 按启动后端的流程跑测试页
 + 提供“模型运行”页以及“训练模型”页触发的`.py`文件相对路径
 + 需将"test.py"和"train.py"内的所有`print()`添加param:`flush=True`。见例：
 # - print('Hello world', flush=True)
@@ -77,11 +77,11 @@ Visit [localhost:2000/client?1](http://localhost:2000/client?1).
 # - 方法1：parser.add_argument
 # - 方法2：os.getenv('SELECTED_MODEL')
 
-! 最终debug
-- 测试product版后端，查收成品
++ 最终debug
++ 测试product版后端，查收成品
 ```
 
-### Thisoe's memo
+### Flask and Frontend Missions (Thisoe)
 ```diff
 + 测试页: 测试`render_template`(CSS,JS,和后端变量发送到前端)
 + 查找Flask是否动态渲染——持续接受后端数据以及前后端互动性问题
@@ -101,7 +101,8 @@ Visit [localhost:2000/client?1](http://localhost:2000/client?1).
 
 + 联络以询问"模型甲乙丙丁"（#p1 <select>）的后端逻辑需求=
 
-! 最终debug
-- 修改serv.py为product，上交成品
++ 最终debug
++ ?p2添加执行按钮
++ 修改serv.py为product，上交成品
 # - 删掉 `app.run` 的 `debug=True`
 ```
