@@ -1,10 +1,7 @@
 <h1>树木密度监测模型的推流展示GUI全栈<br>Tree-Density Model: Full-Stack Bash Streaming Presentation GUI</h1>
-#Flask #jQuery
+[#Linux](https://github.com/topics/linux) [#Flask](https://github.com/topics/flask) [#jQuery](https://github.com/topics/jquery)
 
 # 目录
-
-> 快捷跳转：
-> [作业](#mission-for-teammates-作业) / [TODO](#thisoes-memo)
 
 - **[服务器使用说明（英文）](#documentation)**
   - [启动服务器的流程](#backend-launching)
@@ -20,28 +17,24 @@
 
 ## Backend Launching
 
-1. Check out repo diff, then upload updated source files through FTP.
-
-2. Open an SSH, create tunnel at port `2000`.
+1. New SSH (run `proxy_in_instance`)
 ```bash
 cd public_html
 chmod +x proxy_in_instance
 ./proxy_in_instance
 ```
 
-3. Open another SSH, run Flask app.
+2. Another new SSH (run Flask app)
 ```bash
 python public_html/serv.py
 ```
 
-4. Login to _AutoDL_ tunneling tool.
+3. Login `AutoDL.exe`
 ```bat
-ssh ...
-::<password>
-2000
+Port: 2000
 ```
 
-5. Visit [`localhost:2000/client?0`](http://localhost:2000/client?0) for test result.
+Visit [localhost:2000/client?1](http://localhost:2000/client?1).
 
 
 
