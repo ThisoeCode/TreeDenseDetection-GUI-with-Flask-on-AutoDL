@@ -1,12 +1,12 @@
 :root{
-  
+  --thisoe:#178577;
 }
 
 /* reset */
 *{margin:0}
 html,body{height:100%;padding:0;font-family:sans-serif}
 i,aside{all:unset;display:flex}
-div{display:none}
+gt,num{all:unset}
 button{
   padding:3pt 9pt;
   cursor:pointer;
@@ -15,7 +15,7 @@ button{
 ::-webkit-scrollbar{width:9px;height:9px;}
 ::-webkit-scrollbar-track{background-color:#ccc}
 ::-webkit-scrollbar-thumb{
-  background-color:#178577;
+  background-color:var(--thisoe);
   transition:.2s ease;
 }
 ::-webkit-scrollbar-thumb:hover{background-color:#399}
@@ -23,6 +23,7 @@ button{
 
 
 /***** base *****/
+div{display:none}
 h1{
   font-size:27pt;
   line-height:63pt; /* DO NOT CHANGE */
@@ -31,7 +32,7 @@ h1{
   user-select:none;
 }
 h1 span{cursor:pointer}
-h1 span:hover{color:#178577}
+h1 span:hover{color:var(--thisoe)}
 
 main{height:calc(100% - 63pt)}
 #loading{
@@ -94,17 +95,39 @@ aside img{height:12pt}
 }
 .media-wrap>i{
   flex:1;
+  justify-content:space-between;
   border:gray solid 3px; border-left:0;
   background-size:contain;
   background-repeat:no-repeat;
   background-position:center;
 }
-.media-wrap>i>i{
+.media-wrap>i>*{
   margin:0 9px;
   font-size:18pt;font-weight:bold; color:#000;
   -webkit-text-stroke: 1px #fff;
   user-select:none;
 }
+#media-ori i{color:green}
+#media-pre i{color:blue}
+
+#plot{
+  display:flex;flex-direction:column;
+  width:50pt; padding:0 9pt;
+  border:gray solid 3px; border-left:0;
+}
+#plot>*{
+  display:flex;flex-direction:row;
+  justify-content:space-around;
+}
+#plot>i{flex:1;align-items:flex-end;padding-top:18pt}
+#plot h3{height:30pt}
+#plot h3 i{width:50%;justify-content:center}
+gt,num{
+  width:12pt;height:3.3%;
+  background:green;
+  transition:.2 ease;
+}
+num{background:blue}
 
 .foot{flex-direction:column}
 .form{padding:3pt}
@@ -136,7 +159,7 @@ select,#submit1{font-size:16pt}
   margin:0 3px;
   width:12pt;height:12pt;
   border-radius:99px;
-  background:#178577;
+  background:var(--thisoe);
 }
 
 #fc-menu{border:#aaa solid thin;background:#eee}

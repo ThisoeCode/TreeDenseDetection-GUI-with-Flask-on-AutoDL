@@ -16,6 +16,8 @@ $(_=>{
 
   const
     regimg=/Img name:\s*\['(.*?)'\]/,
+    regGT=/GROUNDTRUTH: *(.*?) /,
+    regNUM=/NUMBER: *(.*?);/,
     p2aTime=[233,33, 2333,99],
     p2aEpoch=[4, 4,3, 4,3, 3,4,3],
 
@@ -31,7 +33,7 @@ $(_=>{
         ?'模型运行'
         :_===2
           ?'训练模型'
-          :'测试页面'
+          :'前端测试'
     )},
     flipTo=_=>{
       window.history.pushState({},'',`${(new URL(window.location)).pathname}?`+_)
@@ -62,10 +64,15 @@ $(_=>{
       ['THISOE_PYERROR','red'],
     ],
     listImg=line=>{
-      const match = line.match(regimg)
-      match&&match[1]&&
+      const
+        IMG = line.match(regimg),
+        GT = line.match(regGT),
+        NUM = line.match(regNUM)
+      IMG&&IMG[1]&&
+      GT&&GT[1]&&
+      NUM&&NUM[1]&&
         $('aside').append(
-          `<i i="${match[1]}"><img alt="data" src="/static/img/ico_mat.png"><span>${match[1]}.mat</span></i>`
+          `<i i="${IMG[1]}" gt="${GT[1]}" num="${NUM[1]}"><img alt="data" src="/static/img/ico_mat.png"><span>${IMG[1]}.mat</span></i>`
         )
     },
     /** @param {boolean} _ - truthy for starting, falsy for stopping */
@@ -241,10 +248,22 @@ $(_=>{
   $('aside').on('click','i',function(){
     const
       imgName=$(this).attr('i'),
+      gt=parseInt( $(this).attr('gt') ),
+      num=parseInt( $(this).attr('num') ),
       bg='background-image',
-      img=_=>`url(/api/img?dir=${_}&img=${imgName})`
+      img=_=>`url(/api/img?dir=${_}&img=${imgName})`,
+    // plot prepare
+      perGT=gt>num ? 100 : (gt/num)*100,
+      perNUM=gt<num ? 100 : (num/gt)*100
+    // render
     $('#media-ori').css(bg,img('ori'))
     $('#media-pre').css(bg,img('pre'))
+    $('#media-ori>i').text(gt)
+    $('#media-pre>i').text(
+      Math.floor(num * 10) / 10
+    )
+    $('gt').css('height',perGT+'%').prop('title',gt)
+    $('num').css('height',perNUM+'%').prop('title',num)
   })
 
 

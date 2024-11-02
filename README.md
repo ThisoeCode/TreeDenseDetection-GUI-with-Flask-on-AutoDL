@@ -79,6 +79,10 @@ Visit [localhost:2000/client?1](http://localhost:2000/client?1).
 
 + 最终debug
 + 测试product版后端，查收成品
+
+  ========== 中期修改 ==========
++ 程序补丁：print真实结果
+# - 每行数据中添加 `GROUNDTRUTH` 和 `NUMBER`
 ```
 
 ### Flask and Frontend Missions (Thisoe)
@@ -105,4 +109,7 @@ Visit [localhost:2000/client?1](http://localhost:2000/client?1).
 + ?p2添加执行按钮
 + 修改serv.py为product，上交成品
 # - 删掉 `app.run` 的 `debug=True`
+
+  ========== 中期修改 ==========
+! 显示真实结果数据和柱状图
 ```
