@@ -60,7 +60,9 @@ $(_=>{
       ['Img name','aqua'],
       [' Error','gold'],
       [' Model out','lime'],
+      [' NUMBER','lime'],
       [' GT count','wheat'],
+      [' GROUNDTRUTH','wheat'],
       ['THISOE_PYERROR','red'],
     ],
     listImg=line=>{

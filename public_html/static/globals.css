@@ -103,8 +103,8 @@ aside img{height:12pt}
 }
 .media-wrap>i>*{
   margin:0 9px;
-  font-size:18pt;font-weight:bold; color:#000;
-  -webkit-text-stroke: 1px #fff;
+  font-size:21pt;font-weight:bold; color:#000;
+  -webkit-text-stroke:.3px #eee;
   user-select:none;
 }
 #media-ori i{color:green}
@@ -160,6 +160,8 @@ select,#submit1{font-size:16pt}
   width:12pt;height:12pt;
   border-radius:99px;
   background:var(--thisoe);
+  &:nth-of-type(1):hover{background:#35f}
+  &:nth-of-type(3):hover{background:#c13}
 }
 
 #fc-menu{border:#aaa solid thin;background:#eee}
