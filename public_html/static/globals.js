@@ -1,4 +1,11 @@
 $(_=>{
+
+  // CONFIG
+  /** LATE_TERM_REVISION */
+  const LTR = true
+
+
+
   // TEST
   $('#testjs').on('click',_=>{
     alert('测试成功。')
@@ -249,9 +256,15 @@ $(_=>{
   // show IMG
   $('aside').on('click','i',function(){
     const
-      imgName=$(this).attr('i'),
-      gt=parseInt( $(this).attr('gt') ),
-      num=parseInt( $(this).attr('num') ),
+      imgName=LTR
+        ? '1000238'
+        : $(this).attr('i'),
+      gt=LTR
+        ? 156
+        : parseInt( $(this).attr('gt') ),
+      num=LTR
+        ?Math.floor(gt * .72)
+        :parseInt( $(this).attr('num') ),
       bg='background-image',
       img=_=>`url(/api/img?dir=${_}&img=${imgName})`,
     // plot prepare

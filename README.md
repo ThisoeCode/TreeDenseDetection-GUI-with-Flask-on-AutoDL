@@ -115,4 +115,7 @@ Visit [localhost:2000/client?1](http://localhost:2000/client?1).
 
   ========== 后期修改 ==========
 + 实例迁移后，左栏数据不跟进显示问题
+
++ Merge了核心程序（`test.py`）（在本repo外）
++ 更新图片路径
 ```

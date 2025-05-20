@@ -5,7 +5,9 @@ from flask import Flask, render_template,url_for,request,Response,send_file,abor
 # ------- CONFIG ------- #
 title="树木密度监测"
 mroot='~/0831_code_AdaTreeFormer/'
-img_dir=[mroot+'data/test_data/images/',mroot+'predictions_images/']
+#** type img_dir: [ori, pre]
+# img_dir=[mroot+'data/test_data/images/',mroot+'predictions_images/'] # model `mae-30.82 e-77`
+img_dir=[mroot+'data_卫星/test_data/images/',mroot+'data_卫星/test_data/0/'] # LATE_TERM_REVISION
 streamtype='text/event-stream'
 testmsg = "[test] 测试Jinja2语法后端输出 \n\nImg name:  ['IMG_000'] Error:  0.0 GT count:  0 Model out:  0.0\nImg name:  ['IMG_000'] Error:  0.0 GT count:  0 Model out:  0.0\nImg name:  ['IMG_000'] Error:  0.0 GT count:  0 Model out:  0.0000001\n\n"
 pre2="""
